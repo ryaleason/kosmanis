@@ -53,8 +53,8 @@ export default async function HomePage() {
       {/* =========================================================================
           1. HERO SECTION (Container Biru Pudar dengan Background Halaman Putih)
           ========================================================================= */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[48px] overflow-hidden shadow-xs relative">
+      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
+        <div className="bg-white rounded-[36px] sm:rounded-[48px] overflow-hidden relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[460px] lg:min-h-[520px]">
             {/* Left Column: Headlines & CTAs */}
             <div className="lg:col-span-7 p-6 sm:p-10 lg:p-14 flex flex-col justify-center space-y-6 text-center lg:text-left z-10">
@@ -153,7 +153,7 @@ export default async function HomePage() {
       {/* =========================================================================
           2. 4 QUICK ACTION / INFO CARDS (Tampil Bersih di Background Putih)
           ========================================================================= */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Card 1: Vibrant Cyan Solid Card */}
           <div className="bg-gradient-to-br from-sky-500 via-sky-600 to-cyan-600 text-white p-6 rounded-3xl shadow-md shadow-sky-500/15 flex flex-col justify-between">
@@ -243,7 +243,7 @@ export default async function HomePage() {
       {/* =========================================================================
           3. FASILITAS & LAYANAN (Container Biru Pudar)
           ========================================================================= */}
-      <section id="fasilitas" className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section id="fasilitas" className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <p className="text-xs font-bold uppercase tracking-wider text-sky-600">
@@ -348,7 +348,7 @@ export default async function HomePage() {
       {/* =========================================================================
           4. PILIHAN TIPE KAMAR (Container Biru Pudar)
           ========================================================================= */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
             <div>
@@ -445,7 +445,7 @@ export default async function HomePage() {
       {/* =========================================================================
           5. SPECIALITY BANNER (Full-width Rounded Cyan Banner)
           ========================================================================= */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="rounded-[36px] bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-600 text-white p-8 sm:p-12 shadow-xl shadow-sky-600/20 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-2xl -z-0 pointer-events-none" />
 
@@ -479,7 +479,7 @@ export default async function HomePage() {
       {/* =========================================================================
           6. ALUR SEWA MUDAH (Container Biru Pudar)
           ========================================================================= */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
             <p className="text-xs font-bold uppercase tracking-wider text-sky-600">PROSES MUDAH</p>
@@ -535,7 +535,7 @@ export default async function HomePage() {
       {/* =========================================================================
           7. ATURAN KOS & FAQ (Container Biru Pudar)
           ========================================================================= */}
-      <section id="aturan" className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section id="aturan" className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Aturan & Tata Tertib */}
@@ -598,7 +598,7 @@ export default async function HomePage() {
       {/* =========================================================================
           8. LOKASI KOS (Container Biru Pudar)
           ========================================================================= */}
-      <section id="lokasi" className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section id="lokasi" className="max-w-[110rem] mx-auto px-4 sm:px-6">
         <div className="bg-[#f0f8fb] rounded-[36px] p-8 border border-sky-100/90 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center sm:text-left">
             <p className="text-xs font-bold uppercase tracking-wider text-sky-600">LOKASI KOS</p>

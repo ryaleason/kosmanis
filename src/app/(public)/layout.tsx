@@ -27,7 +27,7 @@ export default async function PublicLayout({
       <Navbar propertyName={property.name} category={property.category || 'campur'} />
       <main className="flex-1">{children}</main>
       <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm mt-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="max-w-[110rem] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left">
             <p className="font-bold text-white text-base tracking-tight">{property.name}</p>
             <p className="text-xs text-slate-400 mt-1">{property.address}, {property.city}</p>
