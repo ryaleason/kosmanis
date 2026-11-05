@@ -13,8 +13,8 @@ export function Navbar({ propertyName, category }: NavbarProps) {
     category === 'campur' ? 'Campur' : category === 'putra' ? 'Khusus Putra' : 'Khusus Putri';
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sky-100/80">
-      <div className="max-w-[110rem] mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition">
             <Building2 className="w-5 h-5" />

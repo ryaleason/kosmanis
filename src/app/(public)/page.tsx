@@ -49,21 +49,21 @@ export default async function HomePage() {
   )}`;
 
   return (
-    <div className="space-y-10 sm:space-y-14 py-8 sm:py-12 bg-white pb-20">
+    <div className="space-y-12 sm:space-y-16 py-8 sm:py-12 bg-white pb-20">
       {/* =========================================================================
-          1. HERO SECTION (Container Biru Pudar dengan Background Halaman Putih)
+          1. HERO SECTION (Layout Seimbang, Lebar Sempurna max-w-7xl)
           ========================================================================= */}
-      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
-        <div className="bg-white rounded-[36px] sm:rounded-[48px] overflow-hidden relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[460px] lg:min-h-[520px]">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] overflow-hidden shadow-xs relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[460px] lg:min-h-[500px]">
             {/* Left Column: Headlines & CTAs */}
-            <div className="lg:col-span-7 p-6 sm:p-10 lg:p-14 flex flex-col justify-center space-y-6 text-center lg:text-left z-10">
+            <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6 text-center lg:text-left z-10">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-sky-800 text-xs font-semibold border border-sky-200 shadow-xs w-fit mx-auto lg:mx-0">
-                <Sparkles className="w-3.5 h-3.5 text-sky-600" />
-                <span>PILIHAN HUNIAN TERBAIK DI {property.city.toUpperCase()}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+                <span>PILIHAN HUNIAN TERBAIK DI {property.city.toUpperCase()} • MULAI {formatRupiah(minPrice)}/BLN</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-[48px] font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+              <h1 className="text-4xl sm:text-5xl lg:text-[46px] font-extrabold tracking-tight text-slate-900 leading-[1.18]">
                 Tinggal Nyaman, Tenang & Aman di{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-cyan-500">
                   {property.name}
@@ -92,40 +92,56 @@ export default async function HomePage() {
                 </a>
               </div>
 
-              {/* Micro-Features Strip */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-2 text-xs font-medium text-slate-500">
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-sky-500" />
-                  {property.city}
-                </span>
-                <span className="w-1 h-1 rounded-full bg-slate-300" />
-                <span className="text-sky-700 font-semibold">
-                  Mulai {formatRupiah(minPrice)}/bln
-                </span>
-                <span className="w-1 h-1 rounded-full bg-slate-300" />
-                <span className="text-emerald-700 font-semibold">Air & WiFi Gratis</span>
+              {/* Social Proof / Stats Strip (Persis Gaya Referensi) */}
+              <div className="pt-6 border-t border-sky-100/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-8 text-xs text-slate-600">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-white text-sky-600 shadow-xs flex items-center justify-center font-bold text-xs shrink-0 border border-sky-100">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-extrabold text-slate-900 text-sm leading-tight">{vacantRooms} Kamar</p>
+                    <p className="text-slate-500 text-[11px]">Tersedia Real-time</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-white text-emerald-600 shadow-xs flex items-center justify-center font-bold text-xs shrink-0 border border-sky-100">
+                    <Wifi className="w-4 h-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-extrabold text-slate-900 text-sm leading-tight">100 Mbps</p>
+                    <p className="text-slate-500 text-[11px]">Air & WiFi Gratis</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-white text-cyan-600 shadow-xs flex items-center justify-center font-bold text-xs shrink-0 border border-sky-100">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-extrabold text-slate-900 text-sm leading-tight">24 Jam</p>
+                    <p className="text-slate-500 text-[11px]">Keamanan & Gerbang</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Right Column: The exact curved blue shape with kos.jpeg inside */}
-            <div className="lg:col-span-5 relative min-h-[360px] sm:min-h-[440px] lg:min-h-full flex items-center justify-center p-4 sm:p-6 lg:p-0">
-              {/* Outer Curved Shape (rounded-bl on desktop to sweep inwards) */}
-              <div className="relative w-full h-full min-h-[340px] sm:min-h-[420px] lg:min-h-full rounded-[32px] lg:rounded-none lg:rounded-bl-[260px] overflow-hidden bg-gradient-to-br from-sky-400 via-sky-500 to-cyan-500 shadow-lg">
+            {/* Right Column: Featured Image with Organic Sweeping Curve */}
+            <div className="lg:col-span-5 relative min-h-[340px] sm:min-h-[420px] lg:min-h-full flex items-center justify-center p-4 sm:p-6 lg:p-0">
+              <div className="relative w-full h-full min-h-[340px] sm:min-h-[420px] lg:min-h-full rounded-[28px] lg:rounded-none lg:rounded-bl-[240px] overflow-hidden bg-gradient-to-br from-sky-400 via-sky-500 to-cyan-500 shadow-lg">
                 <Image
                   src="/images/kos.jpeg"
                   alt={`Gedung ${property.name}`}
                   fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 520px"
+                  sizes="(max-width: 1024px) 100vw, 480px"
                   className="object-cover object-center"
                 />
-
-                {/* Subtle soft gradient overlay so cyan accents blend smoothly */}
                 <div className="absolute inset-0 bg-gradient-to-t from-sky-950/30 via-transparent to-sky-500/10 pointer-events-none" />
               </div>
 
-              {/* Floating Badge 1 (Top-Right): rounded-2xl square with cyan inner icon */}
-              <div className="absolute top-8 right-8 bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-xl border border-sky-100 flex items-center gap-3 z-20">
+              {/* Floating Badge 1 (Top-Right): rounded-2xl square */}
+              <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-xl border border-sky-100 flex items-center gap-3 z-20">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-sky-500/30">
                   <Sparkles className="w-5 h-5" />
                 </div>
@@ -135,8 +151,8 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {/* Floating Badge 2 (Mid-Left Edge / Boundary Overlap): rounded-2xl square with cyan inner icon */}
-              <div className="absolute bottom-8 left-6 sm:bottom-12 sm:left-8 lg:-left-7 bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-xl border border-sky-100 flex items-center gap-3 z-20">
+              {/* Floating Badge 2 (Mid-Left Edge / Boundary Overlap) */}
+              <div className="absolute bottom-6 left-5 sm:bottom-10 sm:left-6 lg:-left-6 bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-xl border border-sky-100 flex items-center gap-3 z-20">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-sky-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/30">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
@@ -151,9 +167,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          2. 4 QUICK ACTION / INFO CARDS (Tampil Bersih di Background Putih)
+          2. 4 QUICK ACTION / INFO CARDS (max-w-7xl)
           ========================================================================= */}
-      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Card 1: Vibrant Cyan Solid Card */}
           <div className="bg-gradient-to-br from-sky-500 via-sky-600 to-cyan-600 text-white p-6 rounded-3xl shadow-md shadow-sky-500/15 flex flex-col justify-between">
@@ -241,9 +257,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          3. FASILITAS & LAYANAN (Container Biru Pudar)
+          3. FASILITAS & LAYANAN (max-w-7xl)
           ========================================================================= */}
-      <section id="fasilitas" className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section id="fasilitas" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <p className="text-xs font-bold uppercase tracking-wider text-sky-600">
@@ -346,9 +362,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          4. PILIHAN TIPE KAMAR (Container Biru Pudar)
+          4. PILIHAN TIPE KAMAR (max-w-7xl)
           ========================================================================= */}
-      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
             <div>
@@ -443,9 +459,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          5. SPECIALITY BANNER (Full-width Rounded Cyan Banner)
+          5. SPECIALITY BANNER (max-w-7xl)
           ========================================================================= */}
-      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-[36px] bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-600 text-white p-8 sm:p-12 shadow-xl shadow-sky-600/20 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-2xl -z-0 pointer-events-none" />
 
@@ -477,9 +493,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          6. ALUR SEWA MUDAH (Container Biru Pudar)
+          6. ALUR SEWA MUDAH (max-w-7xl)
           ========================================================================= */}
-      <section className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
             <p className="text-xs font-bold uppercase tracking-wider text-sky-600">PROSES MUDAH</p>
@@ -533,9 +549,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          7. ATURAN KOS & FAQ (Container Biru Pudar)
+          7. ATURAN KOS & FAQ (max-w-7xl)
           ========================================================================= */}
-      <section id="aturan" className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section id="aturan" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[44px] p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Aturan & Tata Tertib */}
@@ -596,9 +612,9 @@ export default async function HomePage() {
       </section>
 
       {/* =========================================================================
-          8. LOKASI KOS (Container Biru Pudar)
+          8. LOKASI KOS (max-w-7xl)
           ========================================================================= */}
-      <section id="lokasi" className="max-w-[110rem] mx-auto px-4 sm:px-6">
+      <section id="lokasi" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#f0f8fb] rounded-[36px] p-8 border border-sky-100/90 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center sm:text-left">
             <p className="text-xs font-bold uppercase tracking-wider text-sky-600">LOKASI KOS</p>
