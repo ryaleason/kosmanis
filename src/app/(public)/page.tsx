@@ -54,19 +54,16 @@ export default async function HomePage() {
           1. HERO SECTION (Container Biru Pudar dengan Background Halaman Putih)
           ========================================================================= */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[48px] p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xs">
-          {/* Subtle Ambient Decorative Glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-200/40 rounded-full blur-3xl pointer-events-none -z-0" />
-
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+        <div className="bg-[#f0f8fb] border border-sky-100/90 rounded-[36px] sm:rounded-[48px] overflow-hidden shadow-xs relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[460px] lg:min-h-[520px]">
             {/* Left Column: Headlines & CTAs */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-sky-800 text-xs font-semibold border border-sky-200 shadow-xs">
+            <div className="lg:col-span-7 p-6 sm:p-10 lg:p-14 flex flex-col justify-center space-y-6 text-center lg:text-left z-10">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-sky-800 text-xs font-semibold border border-sky-200 shadow-xs w-fit mx-auto lg:mx-0">
                 <Sparkles className="w-3.5 h-3.5 text-sky-600" />
                 <span>PILIHAN HUNIAN TERBAIK DI {property.city.toUpperCase()}</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+              <h1 className="text-4xl sm:text-5xl lg:text-[48px] font-extrabold tracking-tight text-slate-900 leading-[1.15]">
                 Tinggal Nyaman, Tenang & Aman di{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-cyan-500">
                   {property.name}
@@ -110,38 +107,42 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right Column: Featured Image with Soft Organic Curved Frame */}
-            <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-full max-w-[390px] aspect-[4/3] sm:aspect-square rounded-[32px] overflow-hidden shadow-xl shadow-sky-900/10 border-4 border-white bg-sky-100">
+            {/* Right Column: The exact curved blue shape with kos.jpeg inside */}
+            <div className="lg:col-span-5 relative min-h-[360px] sm:min-h-[440px] lg:min-h-full flex items-center justify-center p-4 sm:p-6 lg:p-0">
+              {/* Outer Curved Shape (rounded-bl on desktop to sweep inwards) */}
+              <div className="relative w-full h-full min-h-[340px] sm:min-h-[420px] lg:min-h-full rounded-[32px] lg:rounded-none lg:rounded-bl-[260px] overflow-hidden bg-gradient-to-br from-sky-400 via-sky-500 to-cyan-500 shadow-lg">
                 <Image
                   src="/images/kos.jpeg"
                   alt={`Gedung ${property.name}`}
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 390px"
+                  sizes="(max-width: 1024px) 100vw, 520px"
                   className="object-cover object-center"
                 />
 
-                {/* Floating Badge 1 (Top-Right): Real-time Vacant Badge */}
-                <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-md border border-sky-100 flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600">
-                    <Sparkles className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-[10px] uppercase font-semibold text-slate-500">Kamar Kosong</p>
-                    <p className="text-xs font-bold text-sky-700">{vacantRooms} Kamar Tersedia</p>
-                  </div>
-                </div>
+                {/* Subtle soft gradient overlay so cyan accents blend smoothly */}
+                <div className="absolute inset-0 bg-gradient-to-t from-sky-950/30 via-transparent to-sky-500/10 pointer-events-none" />
+              </div>
 
-                {/* Floating Badge 2 (Bottom-Left): Security Badge */}
-                <div className="absolute bottom-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-md border border-sky-100 flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-[10px] uppercase font-semibold text-slate-500">Keamanan</p>
-                    <p className="text-xs font-bold text-slate-800">CCTV & Akses Gerbang</p>
-                  </div>
+              {/* Floating Badge 1 (Top-Right): rounded-2xl square with cyan inner icon */}
+              <div className="absolute top-8 right-8 bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-xl border border-sky-100 flex items-center gap-3 z-20">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-sky-500/30">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div className="text-left pr-1">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Kamar Kosong</p>
+                  <p className="text-xs font-extrabold text-sky-700">{vacantRooms} Kamar Tersedia</p>
+                </div>
+              </div>
+
+              {/* Floating Badge 2 (Mid-Left Edge / Boundary Overlap): rounded-2xl square with cyan inner icon */}
+              <div className="absolute bottom-8 left-6 sm:bottom-12 sm:left-8 lg:-left-7 bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-xl border border-sky-100 flex items-center gap-3 z-20">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-sky-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/30">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div className="text-left pr-1">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Keamanan 24 Jam</p>
+                  <p className="text-xs font-extrabold text-slate-800">CCTV & Akses Gerbang</p>
                 </div>
               </div>
             </div>
