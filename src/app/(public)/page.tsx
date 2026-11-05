@@ -32,7 +32,7 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16 border-b border-slate-200">
         {/* Background Image with Overlay */}
-        <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 z-0">
           <Image
             src="/images/kos.jpeg"
             alt={property.name}
@@ -41,10 +41,10 @@ export default async function HomePage() {
             sizes="100vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/90 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/90" />
         </div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-200 text-xs font-semibold border border-blue-400/30 backdrop-blur-sm">
             <Sparkles className="w-3.5 h-3.5 text-blue-300" />
             <span>Kamar Tersedia Real-time: {vacantRooms} Kamar Kosong</span>
