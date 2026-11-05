@@ -23,16 +23,16 @@ export default async function PublicLayout({
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#eaf6f9]/80 via-[#f4fafb] to-white text-slate-900 selection:bg-sky-200">
       <Navbar propertyName={property.name} category={property.category || 'campur'} />
       <main className="flex-1">{children}</main>
-      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div>
-            <p className="font-bold text-white text-base">{property.name}</p>
-            <p className="text-xs text-slate-500 mt-1">{property.address}, {property.city}</p>
+      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm mt-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="text-center sm:text-left">
+            <p className="font-bold text-white text-base tracking-tight">{property.name}</p>
+            <p className="text-xs text-slate-400 mt-1">{property.address}, {property.city}</p>
           </div>
-          <p className="text-xs">
+          <p className="text-xs text-slate-500 text-center sm:text-right">
             © 2026 {property.name}. Sistem Manajemen Kos Terpadu.
           </p>
         </div>

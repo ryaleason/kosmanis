@@ -4,8 +4,24 @@ import { db } from '@/db';
 import { properties, roomTypes, rooms } from '@/db/schema';
 import { getSeedData } from '@/db/seed';
 import { formatRupiah } from '@/lib/format';
-import { CheckCircle2, ShieldAlert, Sparkles, MapPin, ArrowRight } from 'lucide-react';
-
+import {
+  Sparkles,
+  MapPin,
+  ArrowRight,
+  Clock,
+  CalendarCheck,
+  Wifi,
+  ShieldCheck,
+  CheckCircle2,
+  PhoneCall,
+  Wind,
+  Bath,
+  BedDouble,
+  UtensilsCrossed,
+  ShieldAlert,
+  HelpCircle,
+  BadgeCheck,
+} from 'lucide-react';
 
 export default async function HomePage() {
   let property;
@@ -25,78 +41,330 @@ export default async function HomePage() {
   }
 
   const vacantRooms = allRooms.filter((r) => r.status === 'kosong').length;
-  const minPrice = allRoomTypes.length > 0 ? Math.min(...allRoomTypes.map((t) => t.basePrice)) : 1000000;
+  const minPrice =
+    allRoomTypes.length > 0 ? Math.min(...allRoomTypes.map((t) => t.basePrice)) : 1500000;
+
+  const waLink = `https://wa.me/${property.whatsappNumber}?text=${encodeURIComponent(
+    `Halo Admin ${property.name}, saya tertarik untuk menanyakan info dan ketersediaan kamar.`
+  )}`;
 
   return (
-    <div className="space-y-16 pb-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-16 border-b border-slate-200">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/kos.jpeg"
-            alt={property.name}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/90" />
-        </div>
+    <div className="space-y-16 sm:space-y-24 pb-20 overflow-hidden">
+      {/* =========================================================================
+          1. HERO SECTION (Split Layout + Curvature Reference Theme)
+          ========================================================================= */}
+      <section className="relative pt-6 sm:pt-12 pb-12 sm:pb-16">
+        {/* Soft Decorative Ambient Blob */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-sky-200/50 via-cyan-100/30 to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-200 text-xs font-semibold border border-blue-400/30 backdrop-blur-sm">
-            <Sparkles className="w-3.5 h-3.5 text-blue-300" />
-            <span>Kamar Tersedia Real-time: {vacantRooms} Kamar Kosong</span>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Left Column: Headlines & CTAs */}
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-100 text-sky-800 text-xs font-semibold border border-sky-200 shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-sky-600" />
+                <span>PILIHAN HUNIAN TERBAIK DI {property.city.toUpperCase()}</span>
+              </div>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Tinggal Nyaman & Tenang di <span className="text-blue-400">{property.name}</span>
-          </h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+                Tinggal Nyaman, Tenang & Aman di{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-cyan-500">
+                  {property.name}
+                </span>
+              </h1>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-200 leading-relaxed">
-            {property.description}
-          </p>
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                {property.description}
+              </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Link
-              href="/kamar"
-              className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-blue-500/25 transition flex items-center justify-center gap-2"
-            >
-              <span>Lihat Pilihan Kamar</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#aturan"
-              className="w-full sm:w-auto px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-sm rounded-xl border border-white/20 backdrop-blur-sm transition"
-            >
-              Fasilitas & Aturan Kos
-            </a>
-          </div>
+              {/* Action Buttons (Rounded Pill Style) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+                <Link
+                  href="/kamar"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-sky-500 to-cyan-600 hover:from-sky-600 hover:to-cyan-700 text-white font-bold text-sm shadow-lg shadow-sky-500/25 transition flex items-center justify-center gap-2"
+                >
+                  <span>Lihat Pilihan Kamar</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
 
-          <div className="flex items-center justify-center gap-6 pt-4 text-xs text-slate-300">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-blue-300" />
-              {property.city}
-            </span>
-            <span>Mulai dari {formatRupiah(minPrice)}/bulan</span>
-            <span>Air & WiFi Gratis</span>
+                <a
+                  href="#fasilitas"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm border border-slate-200 shadow-sm hover:shadow transition flex items-center justify-center gap-2"
+                >
+                  <span>Fasilitas & Layanan</span>
+                </a>
+              </div>
+
+              {/* Micro-Features Strip */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-3 text-xs font-medium text-slate-500">
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-sky-500" />
+                  {property.city}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span className="text-sky-700 font-semibold">
+                  Mulai {formatRupiah(minPrice)}/bln
+                </span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span className="text-emerald-700 font-semibold">Air & WiFi Gratis</span>
+              </div>
+            </div>
+
+            {/* Right Column: Featured Image with Soft Organic Curved Frame */}
+            <div className="lg:col-span-5 relative flex justify-center">
+              {/* Circular Glow Backdrop */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-sky-400/20 to-cyan-300/30 rounded-[40px] transform rotate-3 scale-105 -z-10" />
+
+              <div className="relative w-full max-w-[420px] aspect-[4/3] sm:aspect-square rounded-[36px] overflow-hidden shadow-2xl shadow-sky-900/15 border-4 border-white bg-sky-50">
+                <Image
+                  src="/images/kos.jpeg"
+                  alt={`Gedung ${property.name}`}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 420px"
+                  className="object-cover object-center"
+                />
+
+                {/* Floating Badge 1 (Top-Right): Real-time Vacant Badge */}
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-lg border border-sky-100 flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[10px] uppercase font-semibold text-slate-500">Kamar Kosong</p>
+                    <p className="text-xs font-bold text-sky-700">{vacantRooms} Kamar Tersedia</p>
+                  </div>
+                </div>
+
+                {/* Floating Badge 2 (Bottom-Left): Security Badge */}
+                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-lg border border-sky-100 flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[10px] uppercase font-semibold text-slate-500">Keamanan</p>
+                    <p className="text-xs font-bold text-slate-800">CCTV & Akses Gerbang</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Tipe Kamar Unggulan */}
+      {/* =========================================================================
+          2. FOUR QUICK ACTION / INFO CARDS (Matching Reference Theme)
+          ========================================================================= */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 -mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* Card 1: Vibrant Cyan Solid Card */}
+          <div className="bg-gradient-to-br from-sky-500 via-sky-600 to-cyan-600 text-white p-6 rounded-3xl shadow-lg shadow-sky-500/20 flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 text-white">
+                <Clock className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-lg">Akses & Survei</h3>
+              <p className="text-sky-100 text-xs font-medium mt-1">Setiap Hari (08.00 - 20.00)</p>
+              <p className="text-xs text-sky-50 mt-3 leading-relaxed">
+                Bisa survei lokasi langsung atau video call via WhatsApp pengelola.
+              </p>
+            </div>
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-white bg-white/20 hover:bg-white/30 px-3.5 py-2 rounded-xl transition w-fit"
+            >
+              <span>Jadwalkan Survei</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Card 2: Booking Kamar */}
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+                <CalendarCheck className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-lg text-slate-900">Booking Kamar</h3>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                Pilih tipe kamar favorit Anda dan amankan slot sewa sebelum kehabisan.
+              </p>
+            </div>
+            <Link
+              href="/kamar"
+              className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-700 transition"
+            >
+              <span>Lihat Kamar</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Card 3: Fasilitas Komplit */}
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+                <Wifi className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-lg text-slate-900">Fasilitas Komplit</h3>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                AC, Springbed, Kamar Mandi Dalam, Dapur Bersama & WiFi Cepat 100 Mbps.
+              </p>
+            </div>
+            <a
+              href="#fasilitas"
+              className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-700 transition"
+            >
+              <span>Cek Fasilitas</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Card 4: Lokasi Strategis */}
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-lg text-slate-900">Lokasi Strategis</h3>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                {property.address}, {property.city}. Dekat perkantoran dan fasilitas umum.
+              </p>
+            </div>
+            <a
+              href="#lokasi"
+              className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-700 transition"
+            >
+              <span>Peta & Lokasi</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          3. FASILITAS & LAYANAN (Our Services Style)
+          ========================================================================= */}
+      <section id="fasilitas" className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wider text-sky-600">
+            FASILITAS & LAYANAN
+          </p>
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            Standar Kenyamanan Lengkap untuk Keseharian Anda
+          </h2>
+          <p className="text-sm text-slate-600">
+            Semua fasilitas dirawat secara berkala demi menjamin kenyamanan belajar, istirahat, dan bekerja.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left: Building Photo Highlight Card */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+              <Image
+                src="/images/kos.jpeg"
+                alt="Fasilitas Kos Manis"
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent flex flex-col justify-end p-6 text-white">
+                <span className="text-xs font-bold text-sky-300 uppercase tracking-wider">
+                  Lingkungan Bersih & Tenang
+                </span>
+                <p className="text-sm font-semibold mt-1">
+                  Aturan jam tenang pukul 22.00 WIB untuk memastikan istirahat berkualitas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Grid of Facility Cards with Sky Theme Icons */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 bg-white rounded-2xl border border-sky-100/80 shadow-sm flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <Wind className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">AC Tiap Kamar</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Sejuk dan nyaman untuk istirahat.</p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white rounded-2xl border border-sky-100/80 shadow-sm flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <Bath className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">Kamar Mandi Dalam</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Bersih dengan kloset duduk & shower.</p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white rounded-2xl border border-sky-100/80 shadow-sm flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <BedDouble className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">Kasur Springbed</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Lengkap dengan sprei & bantal.</p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white rounded-2xl border border-sky-100/80 shadow-sm flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <Wifi className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">WiFi 100 Mbps Gratis</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Koneksi stabil untuk WFH & kuliah.</p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white rounded-2xl border border-sky-100/80 shadow-sm flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <UtensilsCrossed className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">Dapur Bersama</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Kompor, kulkas, dan tempat cuci piring.</p>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white rounded-2xl border border-sky-100/80 shadow-sm flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">Keamanan & CCTV</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Pengawasan 24 jam & gerbang terkunci.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          4. PILIHAN TIPE KAMAR (Our Specialists / Room Cards Style)
+          ========================================================================= */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Pilihan Tipe Kamar</h2>
+            <p className="text-xs font-bold uppercase tracking-wider text-sky-600">PILIHAN KAMAR</p>
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 mt-1">
+              Pilihan Tipe Kamar Siap Huni
+            </h2>
             <p className="text-sm text-slate-600 mt-1">
-              Semua kamar difoto apa adanya tanpa manipulasi berlebih.
+              Foto asli apa adanya tanpa manipulasi berlebih.
             </p>
           </div>
-          <Link href="/kamar" className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+          <Link
+            href="/kamar"
+            className="text-xs font-bold px-4 py-2.5 rounded-full bg-sky-50 text-sky-600 hover:bg-sky-100 transition flex items-center gap-1.5 w-fit"
+          >
             <span>Lihat Semua Kamar</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
@@ -104,30 +372,50 @@ export default async function HomePage() {
           {allRoomTypes.map((type) => (
             <div
               key={type.id}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between"
+              className="bg-white rounded-3xl border border-sky-100 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col justify-between"
             >
+              {/* Photo Thumbnail */}
+              <div className="relative h-48 w-full bg-slate-100">
+                <Image
+                  src="/images/kos.jpeg"
+                  alt={type.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  className="object-cover"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-white/95 backdrop-blur text-sky-800 shadow-sm border border-sky-100">
+                    {type.electricityMode === 'termasuk_sewa' ? 'Listrik Termasuk' : 'Listrik Token'}
+                  </span>
+                </div>
+              </div>
+
               <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">{type.name}</h3>
-                    <p className="text-xs text-slate-500 mt-1">{type.description}</p>
+                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{type.description}</p>
                   </div>
-                  <span className="text-lg font-extrabold text-blue-600 shrink-0">
-                    {formatRupiah(type.basePrice)}
-                    <span className="text-xs text-slate-400 font-normal">/bln</span>
-                  </span>
+                  <div className="text-right shrink-0">
+                    <span className="text-xl font-extrabold text-sky-600">
+                      {formatRupiah(type.basePrice)}
+                    </span>
+                    <span className="text-xs text-slate-400 block font-normal">/bulan</span>
+                  </div>
                 </div>
 
                 <div className="mt-5 space-y-2">
-                  <p className="text-xs font-semibold text-slate-700 uppercase tracking-wider">Fasilitas Kamar:</p>
+                  <p className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Fasilitas Kamar:
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {type.facilities &&
                       (type.facilities as string[]).map((fac, i) => (
                         <span
                           key={i}
-                          className="inline-flex items-center gap-1 text-xs px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-100"
                         >
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                          <CheckCircle2 className="w-3 h-3 text-sky-600" />
                           {fac}
                         </span>
                       ))}
@@ -135,13 +423,16 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span>Deposit Awal: {formatRupiah(type.depositAmount ?? 0)}</span>
+              <div className="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span className="text-slate-500">
+                  Deposit: <strong>{formatRupiah(type.depositAmount ?? 0)}</strong>
+                </span>
                 <Link
                   href="/kamar"
-                  className="font-semibold text-blue-600 hover:text-blue-700"
+                  className="font-bold text-sky-600 hover:text-sky-700 flex items-center gap-1"
                 >
-                  Cek Ketersediaan Kamar →
+                  <span>Pilih & Booking</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -149,69 +440,181 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Fasilitas & Aturan Kos */}
-      <section id="aturan" className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-              <span>Fasilitas Bersama</span>
-            </h3>
-            <ul className="space-y-3 text-sm text-slate-600">
-              {property.facilities &&
-                (property.facilities as string[]).map((fac, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                    <span>{fac}</span>
-                  </li>
-                ))}
-            </ul>
+      {/* =========================================================================
+          5. SPECIALITY BANNER (Full-width Rounded Cyan Banner Style)
+          ========================================================================= */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="rounded-[36px] bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-600 text-white p-8 sm:p-12 shadow-xl shadow-sky-600/20 relative overflow-hidden">
+          {/* Subtle Graphic Curves */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-2xl -z-0 pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-semibold text-white w-fit mx-auto lg:mx-0">
+                <BadgeCheck className="w-4 h-4 text-sky-200" />
+                <span>SISTEM SEWA DIGITAL & TRANSPARAN</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold leading-tight">
+                Bayar Sewa & Bukti Pembayaran Praktis Lewat WhatsApp
+              </h3>
+              <p className="text-sky-50 text-sm sm:text-base leading-relaxed">
+                Tagihan resmi otomatis dikirim ke nomor WhatsApp Anda setiap bulan dengan QRIS statis. Cukup transfer, upload bukti lewat tautan instan tanpa perlu repot login akun.
+              </p>
+            </div>
+
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-full bg-white hover:bg-sky-50 text-sky-700 font-extrabold text-sm shadow-lg transition flex items-center gap-2.5 shrink-0"
+            >
+              <PhoneCall className="w-4 h-4" />
+              <span>Tanya Admin via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          6. ALUR SEWA MUDAH (Schedules Flow Style)
+          ========================================================================= */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wider text-sky-600">PROSES MUDAH</p>
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            4 Langkah Mudah Menyewa di {property.name}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 font-bold text-lg flex items-center justify-center mx-auto">
+              1
+            </div>
+            <h4 className="font-bold text-sm text-slate-900">Pilih Kamar</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Pilih tipe kamar dan lihat status ketersediaan kosong secara real-time di website.
+            </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 font-bold text-lg flex items-center justify-center mx-auto">
+              2
+            </div>
+            <h4 className="font-bold text-sm text-slate-900">Jadwalkan Survei</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Hubungi pengelola untuk cek fisik kamar atau lakukan reservasi langsung.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 font-bold text-lg flex items-center justify-center mx-auto">
+              3
+            </div>
+            <h4 className="font-bold text-sm text-slate-900">Konfirmasi & DP</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Admin mencatat kontrak sewa dan mengirim bukti konfirmasi resmi via WhatsApp.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 font-bold text-lg flex items-center justify-center mx-auto">
+              4
+            </div>
+            <h4 className="font-bold text-sm text-slate-900">Terima Kunci</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Serah terima kunci kamar dan Anda resmi menjadi penghuni di {property.name}.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          7. ATURAN KOS & FAQ
+          ========================================================================= */}
+      <section id="aturan" className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Aturan & Tata Tertib */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-sm">
+            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2.5 mb-5">
               <ShieldAlert className="w-5 h-5 text-amber-600" />
               <span>Aturan & Tata Tertib Kos</span>
             </h3>
-            <ul className="space-y-3 text-sm text-slate-600">
+            <ul className="space-y-3.5 text-sm text-slate-600">
               {property.rules &&
                 (property.rules as string[]).map((rule, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-600 mt-2 shrink-0" />
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0" />
                     <span>{rule}</span>
                   </li>
                 ))}
             </ul>
           </div>
+
+          {/* FAQ */}
+          <div id="faq" className="bg-white rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-sm">
+            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2.5 mb-5">
+              <HelpCircle className="w-5 h-5 text-sky-600" />
+              <span>Pertanyaan yang Sering Diajukan (FAQ)</span>
+            </h3>
+
+            <div className="space-y-4">
+              <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100">
+                <h4 className="font-bold text-xs text-slate-900">
+                  Apakah biaya air dan internet sudah termasuk harga sewa?
+                </h4>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                  Ya, fasilitas air bersih dan WiFi cepat 100 Mbps sudah termasuk dalam biaya sewa bulanan tanpa biaya tambahan.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100">
+                <h4 className="font-bold text-xs text-slate-900">
+                  Bagaimana sistem penagihan sewa tiap bulannya?
+                </h4>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                  Tagihan dikirimkan otomatis ke nomor WhatsApp Anda setiap bulan dengan tautan unik. Anda cukup mentransfer ke QRIS/rekening kos lalu mengunggah bukti bayar langsung.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100">
+                <h4 className="font-bold text-xs text-slate-900">
+                  Apakah bisa melakukan survei lokasi terlebih dahulu?
+                </h4>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                  Tentu saja! Anda bisa langsung menghubungi kami via tombol WhatsApp di pojok kanan bawah untuk mencocokkan jadwal survei.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900">Pertanyaan yang Sering Diajukan (FAQ)</h2>
-          <p className="text-sm text-slate-600 mt-1">Jawaban cepat untuk hal-hal yang sering ditanyakan calon penghuni.</p>
-        </div>
+      {/* =========================================================================
+          8. LOKASI KOS
+          ========================================================================= */}
+      <section id="lokasi" className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="bg-white rounded-3xl p-8 border border-sky-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center sm:text-left">
+            <p className="text-xs font-bold uppercase tracking-wider text-sky-600">LOKASI KOS</p>
+            <h3 className="text-xl font-extrabold text-slate-900">{property.name}</h3>
+            <p className="text-sm text-slate-600 flex items-center gap-1.5 justify-center sm:justify-start">
+              <MapPin className="w-4 h-4 text-sky-500 shrink-0" />
+              <span>{property.address}, {property.city}</span>
+            </p>
+          </div>
 
-        <div className="space-y-4">
-          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-            <h4 className="font-semibold text-sm text-slate-900">Apakah biaya air dan internet sudah termasuk harga sewa?</h4>
-            <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-              Ya, fasilitas air bersih dan koneksi WiFi cepat 100 Mbps sudah termasuk dalam biaya sewa bulanan tanpa biaya tambahan.
-            </p>
-          </div>
-          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-            <h4 className="font-semibold text-sm text-slate-900">Bagaimana sistem pembayaran sewa setiap bulannya?</h4>
-            <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-              Tagihan dikirimkan otomatis ke nomor WhatsApp Anda setiap bulan dengan tautan pembayaran yang aman. Anda cukup mentransfer ke rekening kos atau scan QRIS statis lalu mengunggah bukti bayar langsung tanpa perlu login.
-            </p>
-          </div>
-          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-            <h4 className="font-semibold text-sm text-slate-900">Apakah bisa melakukan survei lokasi terlebih dahulu?</h4>
-            <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-              Tentu saja! Anda bisa langsung menghubungi kami via tombol WhatsApp di pojok kanan bawah untuk menjadwalkan survei kamar.
-            </p>
-          </div>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              `${property.name} ${property.address} ${property.city}`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-sm flex items-center gap-2"
+          >
+            <span>Buka Google Maps</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
       </section>
     </div>
