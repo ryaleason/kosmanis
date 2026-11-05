@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { db } from '@/db';
 import { properties, roomTypes, rooms } from '@/db/schema';
 import { getSeedData } from '@/db/seed';
@@ -29,40 +30,53 @@ export default async function HomePage() {
   return (
     <div className="space-y-16 pb-20">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-blue-50/70 to-slate-50 pt-16 pb-12 border-b border-slate-200">
+      <section className="relative overflow-hidden pt-20 pb-16 border-b border-slate-200">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/images/kos.jpeg"
+            alt={property.name}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/90 backdrop-blur-[1px]" />
+        </div>
+
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold border border-blue-200">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-200 text-xs font-semibold border border-blue-400/30 backdrop-blur-sm">
+            <Sparkles className="w-3.5 h-3.5 text-blue-300" />
             <span>Kamar Tersedia Real-time: {vacantRooms} Kamar Kosong</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Tinggal Nyaman & Tenang di <span className="text-blue-600">{property.name}</span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Tinggal Nyaman & Tenang di <span className="text-blue-400">{property.name}</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-200 leading-relaxed">
             {property.description}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link
               href="/kamar"
-              className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-md transition flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-blue-500/25 transition flex items-center justify-center gap-2"
             >
               <span>Lihat Pilihan Kamar</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#aturan"
-              className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-sm rounded-xl border border-slate-300 transition"
+              className="w-full sm:w-auto px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-sm rounded-xl border border-white/20 backdrop-blur-sm transition"
             >
               Fasilitas & Aturan Kos
             </a>
           </div>
 
-          <div className="flex items-center justify-center gap-6 pt-4 text-xs text-slate-500">
+          <div className="flex items-center justify-center gap-6 pt-4 text-xs text-slate-300">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-slate-400" />
+              <MapPin className="w-4 h-4 text-blue-300" />
               {property.city}
             </span>
             <span>Mulai dari {formatRupiah(minPrice)}/bulan</span>
