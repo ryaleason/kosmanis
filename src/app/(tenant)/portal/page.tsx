@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import { db } from '@/db';
-import { invoices, leases, rooms } from '@/db/schema';
+import { invoices } from '@/db/schema';
 import { desc } from 'drizzle-orm';
 import { getSeedData } from '@/db/seed';
 import { formatRupiah, formatDateWIB } from '@/lib/format';
 import { Home, Receipt, Calendar, ArrowUpRight } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
 
 export default async function TenantPortalPage() {
   let tenantInvoices;

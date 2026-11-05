@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { validateTenantLeaseInput } from '@/server/actions/tenants';
-import { validatePropertyInput } from '@/server/actions/property';
-import { validateRoomInput } from '@/server/actions/rooms';
+import {
+  validateTenantLeaseInput,
+  validatePropertyInput,
+  validateRoomInput,
+} from '@/lib/validators';
 
 describe('Server Actions Validation & Snapshotting', () => {
   it('should validate and snapshot rent and deposit amounts on lease creation', () => {

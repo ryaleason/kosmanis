@@ -1,24 +1,12 @@
-import { z } from 'zod';
+'use server';
+
 import { db } from '@/db';
 import { bookingRequests, rooms } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { requireRole } from '@/lib/auth/session';
-
-export const bookingStatusSchema = z.object({
-  bookingId: z.string().uuid(),
-  status: z.enum([
-    'baru',
-    'dihubungi',
-    'survei_dijadwalkan',
-    'disetujui',
-    'ditolak',
-    'kedaluwarsa',
-  ]),
-  holdUntil: z.string().optional(), // ISO date string
-});
+import { bookingStatusSchema } from '@/lib/validators';
 
 export async function updateBookingStatusAction(input: unknown) {
-  'use server';
   await requireRole(['pemilik', 'admin']);
   const validated = bookingStatusSchema.parse(input);
 

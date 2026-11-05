@@ -1,19 +1,12 @@
-import { z } from 'zod';
+'use server';
+
 import { db } from '@/db';
 import { invoices, payments } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { requireRole } from '@/lib/auth/session';
-
-export const verifyPaymentSchema = z.object({
-  paymentId: z.string().uuid(),
-  status: z.enum(['diterima', 'ditolak']),
-  rejectionReason: z.string().optional(),
-});
-
-export type VerifyPaymentInput = z.infer<typeof verifyPaymentSchema>;
+import { verifyPaymentSchema } from '@/lib/validators';
 
 export async function verifyPaymentAction(input: unknown) {
-  'use server';
   const profile = await requireRole(['pemilik', 'admin']);
   const validated = verifyPaymentSchema.parse(input);
 
@@ -46,4 +39,17 @@ export async function verifyPaymentAction(input: unknown) {
     .where(eq(invoices.id, payment.invoiceId));
 
   return { success: true };
+}
+
+export async function acceptPaymentFormAction(formData: FormData): Promise<void> {
+  const paymentId = formData.get('paymentId') as string;
+  if (!paymentId) throw new Error('ID Pembayaran diperlukan');
+  await verifyPaymentAction({ paymentId, status: 'diterima' });
+}
+
+export async function rejectPaymentFormAction(formData: FormData): Promise<void> {
+  const paymentId = formData.get('paymentId') as string;
+  const reason = (formData.get('reason') as string) || 'Bukti transfer tidak terbaca';
+  if (!paymentId) throw new Error('ID Pembayaran diperlukan');
+  await verifyPaymentAction({ paymentId, status: 'ditolak', rejectionReason: reason });
 }

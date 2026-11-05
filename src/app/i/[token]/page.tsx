@@ -7,7 +7,6 @@ import { formatRupiah, formatDateWIB } from '@/lib/format';
 import { UploadProofForm } from '@/components/tenant/UploadProofForm';
 import { QrCode, CreditCard, Clock, CheckCircle2 } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
 
 interface InvoicePageProps {
   params: Promise<{ token: string }>;

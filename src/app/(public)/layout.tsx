@@ -33,7 +33,7 @@ export default async function PublicLayout({
             <p className="text-xs text-slate-500 mt-1">{property.address}, {property.city}</p>
           </div>
           <p className="text-xs">
-            © {new Date().getFullYear()} {property.name}. Sistem Manajemen Kos Terpadu.
+            © 2026 {property.name}. Sistem Manajemen Kos Terpadu.
           </p>
         </div>
       </footer>

@@ -1,11 +1,9 @@
-import Link from 'next/link';
 import { db } from '@/db';
 import { properties, roomTypes, rooms } from '@/db/schema';
 import { getSeedData } from '@/db/seed';
 import { formatRupiah } from '@/lib/format';
 import { BookingModal } from '@/components/public/BookingModal';
 
-export const dynamic = 'force-dynamic';
 
 export default async function RoomsCatalogPage() {
   let property;

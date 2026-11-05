@@ -2,7 +2,6 @@ import { db } from '@/db';
 import { rooms, roomTypes } from '@/db/schema';
 import { getSeedData } from '@/db/seed';
 
-export const dynamic = 'force-dynamic';
 
 export default async function AdminRoomsPage() {
   let allRooms;

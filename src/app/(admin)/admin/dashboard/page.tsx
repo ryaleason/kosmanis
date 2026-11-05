@@ -1,10 +1,9 @@
 import { db } from '@/db';
-import { rooms, invoices, leases, tenants, payments } from '@/db/schema';
+import { rooms, invoices, payments } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { WhatsAppReminderButton } from '@/components/admin/WhatsAppReminderButton';
 import { getSeedData } from '@/db/seed';
 
-export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboardPage() {
   let allRooms;

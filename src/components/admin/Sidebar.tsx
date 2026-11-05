@@ -12,11 +12,11 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'Kamar & Tipe', href: '/kamar', icon: DoorOpen },
-  { label: 'Penghuni & Kontrak', href: '/penghuni', icon: Users },
-  { label: 'Tagihan & Bayar', href: '/tagihan', icon: Receipt },
-  { label: 'Pengaturan Kos', href: '/pengaturan', icon: Settings },
+  { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+  { label: 'Kamar & Tipe', href: '/admin/kamar', icon: DoorOpen },
+  { label: 'Penghuni & Kontrak', href: '/admin/penghuni', icon: Users },
+  { label: 'Tagihan & Bayar', href: '/admin/tagihan', icon: Receipt },
+  { label: 'Pengaturan Kos', href: '/admin/pengaturan', icon: Settings },
 ];
 
 export function Sidebar() {

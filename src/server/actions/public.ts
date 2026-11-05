@@ -1,20 +1,11 @@
-import { z } from 'zod';
+'use server';
+
 import { db } from '@/db';
 import { bookingRequests, surveySlots } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-
-export const publicBookingSchema = z.object({
-  propertyId: z.string().uuid(),
-  roomId: z.string().uuid().optional(),
-  name: z.string().min(1, 'Nama wajib diisi'),
-  phoneNumber: z.string().min(8, 'Nomor WhatsApp tidak valid'),
-  plannedStartDate: z.string(),
-  durationMonths: z.number().int().min(1).default(1),
-  notes: z.string().optional(),
-});
+import { publicBookingSchema, publicSurveySchema } from '@/lib/validators';
 
 export async function submitBookingAction(input: unknown) {
-  'use server';
   const validated = publicBookingSchema.parse(input);
 
   const [booking] = await db
@@ -34,15 +25,7 @@ export async function submitBookingAction(input: unknown) {
   return { success: true, bookingId: booking.id };
 }
 
-export const publicSurveySchema = z.object({
-  propertyId: z.string().uuid(),
-  slotId: z.string().uuid(),
-  name: z.string().min(1, 'Nama wajib diisi'),
-  phoneNumber: z.string().min(8, 'Nomor WhatsApp tidak valid'),
-});
-
 export async function submitSurveyAction(input: unknown) {
-  'use server';
   const validated = publicSurveySchema.parse(input);
 
   const [slot] = await db

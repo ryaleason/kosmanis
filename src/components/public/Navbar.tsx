@@ -43,7 +43,7 @@ export function Navbar({ propertyName, category }: NavbarProps) {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/dashboard"
+            href="/admin/dashboard"
             className="text-xs font-semibold px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition flex items-center gap-1.5"
           >
             <LogIn className="w-3.5 h-3.5" />

@@ -28,7 +28,7 @@ export default function LoginPage() {
         throw error;
       }
 
-      router.push('/dashboard');
+      router.push('/admin/dashboard');
       router.refresh();
     } catch (err: unknown) {
       setErrorMsg(err instanceof Error ? err.message : 'Gagal login, periksa kembali email dan password');

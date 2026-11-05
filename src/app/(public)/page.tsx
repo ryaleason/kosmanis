@@ -5,7 +5,6 @@ import { getSeedData } from '@/db/seed';
 import { formatRupiah } from '@/lib/format';
 import { CheckCircle2, ShieldAlert, Sparkles, MapPin, ArrowRight } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
   let property;

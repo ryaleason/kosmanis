@@ -2,9 +2,8 @@ import { db } from '@/db';
 import { invoices, payments } from '@/db/schema';
 import { desc } from 'drizzle-orm';
 import { getSeedData } from '@/db/seed';
-import { verifyPaymentAction } from '@/server/actions/invoices';
+import { acceptPaymentFormAction, rejectPaymentFormAction } from '@/server/actions/invoices';
 
-export const dynamic = 'force-dynamic';
 
 export default async function AdminInvoicesPage() {
   let allInvoices;
@@ -83,15 +82,8 @@ export default async function AdminInvoicesPage() {
                     <td className="px-6 py-4 text-right">
                       {payment && payment.status === 'menunggu_verifikasi' ? (
                         <div className="flex items-center justify-end gap-2">
-                          <form
-                            action={async () => {
-                              'use server';
-                              await verifyPaymentAction({
-                                paymentId: payment.id,
-                                status: 'diterima',
-                              });
-                            }}
-                          >
+                          <form action={acceptPaymentFormAction}>
+                            <input type="hidden" name="paymentId" value={payment.id} />
                             <button
                               type="submit"
                               className="px-2.5 py-1 text-xs font-medium bg-emerald-600 text-white rounded hover:bg-emerald-700"
@@ -99,16 +91,9 @@ export default async function AdminInvoicesPage() {
                               Terima
                             </button>
                           </form>
-                          <form
-                            action={async () => {
-                              'use server';
-                              await verifyPaymentAction({
-                                paymentId: payment.id,
-                                status: 'ditolak',
-                                rejectionReason: 'Bukti transfer tidak terbaca',
-                              });
-                            }}
-                          >
+                          <form action={rejectPaymentFormAction}>
+                            <input type="hidden" name="paymentId" value={payment.id} />
+                            <input type="hidden" name="reason" value="Bukti transfer tidak terbaca" />
                             <button
                               type="submit"
                               className="px-2.5 py-1 text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200 rounded hover:bg-rose-100"

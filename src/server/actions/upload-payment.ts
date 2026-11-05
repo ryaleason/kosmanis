@@ -1,17 +1,11 @@
-import { z } from 'zod';
+'use server';
+
 import { db } from '@/db';
 import { invoices, payments } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { isAllowedMimeType, isAllowedFileSize } from '@/lib/storage';
-
-export const uploadPaymentProofSchema = z.object({
-  invoiceToken: z.string().min(1, 'Token tagihan tidak valid'),
-  paymentMethod: z.enum(['transfer_manual', 'qris_statis']).default('transfer_manual'),
-  proofImageUrl: z.string().min(1, 'Bukti pembayaran wajib dilampirkan'),
-});
+import { uploadPaymentProofSchema } from '@/lib/validators';
 
 export async function uploadPaymentProofAction(input: unknown) {
-  'use server';
   const validated = uploadPaymentProofSchema.parse(input);
 
   const [invoice] = await db

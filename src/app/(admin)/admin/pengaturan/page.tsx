@@ -1,9 +1,8 @@
 import { db } from '@/db';
 import { properties } from '@/db/schema';
 import { getSeedData } from '@/db/seed';
-import { updatePropertySettingsAction } from '@/server/actions/property';
+import { updatePropertyFormAction } from '@/server/actions/property';
 
-export const dynamic = 'force-dynamic';
 
 export default async function AdminSettingsPage() {
   let property;
@@ -29,31 +28,8 @@ export default async function AdminSettingsPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
-        <form
-          action={async (formData: FormData) => {
-            'use server';
-            const name = formData.get('name') as string;
-            const category = formData.get('category') as 'putra' | 'putri' | 'campur';
-            const address = formData.get('address') as string;
-            const city = formData.get('city') as string;
-            const whatsappNumber = formData.get('whatsappNumber') as string;
-            const description = formData.get('description') as string;
-
-            await updatePropertySettingsAction({
-              id: property.id,
-              name,
-              category,
-              address,
-              city,
-              whatsappNumber,
-              description,
-              rules: property.rules || [],
-              facilities: property.facilities || [],
-              bankAccounts: property.bankAccounts || [],
-            });
-          }}
-          className="space-y-5"
-        >
+        <form action={updatePropertyFormAction} className="space-y-5">
+          <input type="hidden" name="id" value={property.id} />
           <div>
             <label className="block text-sm font-semibold text-slate-700 mb-1">Nama Kos</label>
             <input

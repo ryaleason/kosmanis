@@ -1,32 +1,12 @@
-import { z } from 'zod';
+'use server';
+
 import { db } from '@/db';
 import { tenants, leases, rooms } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { requireRole } from '@/lib/auth/session';
-
-export const tenantLeaseSchema = z.object({
-  propertyId: z.string().uuid(),
-  tenantName: z.string().min(1, 'Nama penghuni wajib diisi'),
-  idCardNumber: z.string().optional(),
-  phoneNumber: z.string().min(1, 'Nomor HP wajib diisi'),
-  emergencyContactName: z.string().optional(),
-  emergencyContactPhone: z.string().optional(),
-  roomId: z.string().uuid(),
-  rentAmount: z.number().int().positive('Nomor sewa snapshot wajib berupa bilangan bulat positif'),
-  depositAmount: z.number().int().nonnegative().default(0),
-  dueDay: z.number().int().min(1).max(31).default(1),
-  startDate: z.string(), // ISO String
-  endDate: z.string(), // ISO String
-});
-
-export type TenantLeaseInput = z.infer<typeof tenantLeaseSchema>;
-
-export function validateTenantLeaseInput(input: unknown): TenantLeaseInput {
-  return tenantLeaseSchema.parse(input);
-}
+import { validateTenantLeaseInput } from '@/lib/validators';
 
 export async function createTenantLeaseAction(input: unknown) {
-  'use server';
   await requireRole(['pemilik', 'admin']);
   const validated = validateTenantLeaseInput(input);
 
