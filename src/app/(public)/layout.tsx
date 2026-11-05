@@ -23,7 +23,7 @@ export default async function PublicLayout({
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#eaf6f9]/80 via-[#f4fafb] to-white text-slate-900 selection:bg-sky-200">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-sky-200">
       <Navbar propertyName={property.name} category={property.category || 'campur'} />
       <main className="flex-1">{children}</main>
       <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm mt-16">
