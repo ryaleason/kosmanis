@@ -53,11 +53,11 @@ export function Navbar({ propertyName, category }: NavbarProps) {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/admin/dashboard"
-            className="text-xs font-semibold px-4 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white transition flex items-center gap-1.5 shadow-sm"
+            href="/login"
+            className="text-xs font-semibold px-4 py-2 rounded-full bg-[#0F172A] hover:bg-[#1E293B] text-white transition flex items-center gap-1.5"
           >
             <User className="w-3.5 h-3.5" />
-            <span>Panel Pengelola</span>
+            <span>Masuk</span>
           </Link>
         </div>
       </div>

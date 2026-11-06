@@ -126,3 +126,41 @@ export const publicSurveySchema = z.object({
   name: z.string().min(1, 'Nama wajib diisi'),
   phoneNumber: z.string().min(8, 'Nomor WhatsApp tidak valid'),
 });
+
+// Auth Validators (FR-21 & FR-43)
+export const loginSchema = z.object({
+  email: z.string().trim().email('Format email tidak valid'),
+  password: z.string().min(6, 'Kata sandi minimal 6 karakter'),
+  redirectTo: z.string().optional(),
+});
+
+export const otpLoginSchema = z.object({
+  identifier: z
+    .string()
+    .trim()
+    .min(3, 'Masukkan alamat email atau nomor HP yang valid'),
+});
+
+export const verifyOtpSchema = z.object({
+  email: z.string().trim().email('Format email tidak valid').optional(),
+  phone: z.string().trim().optional(),
+  token: z.string().trim().min(6, 'Kode OTP minimal 6 digit'),
+  redirectTo: z.string().optional(),
+});
+
+export type LoginInput = z.infer<typeof loginSchema>;
+export type OtpLoginInput = z.infer<typeof otpLoginSchema>;
+export type VerifyOtpInput = z.infer<typeof verifyOtpSchema>;
+
+export function validateLoginInput(input: unknown): LoginInput {
+  return loginSchema.parse(input);
+}
+
+export function validateOtpLoginInput(input: unknown): OtpLoginInput {
+  return otpLoginSchema.parse(input);
+}
+
+export function validateVerifyOtpInput(input: unknown): VerifyOtpInput {
+  return verifyOtpSchema.parse(input);
+}
+
